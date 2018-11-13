@@ -1,11 +1,9 @@
 package com.epages.interview.dao;
 
+import com.epages.interview.AbstractStorageTest;
 import com.epages.interview.domain.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -15,10 +13,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 @SpringBootTest
-public class ProductRepositoryTest extends AbstractTestNGSpringContextTests {
-
-    @Autowired
-    private ProductRepository productRepository;
+public class ProductRepositoryTest extends AbstractStorageTest {
 
     @Test
     public void productRepositoryTestSuite() {
@@ -46,11 +41,6 @@ public class ProductRepositoryTest extends AbstractTestNGSpringContextTests {
 
         assertNotNull(all);
         assertEquals(1, all.size());
-    }
-
-    @AfterClass
-    void clearStorage() {
-        productRepository.deleteAll();
     }
 
 }

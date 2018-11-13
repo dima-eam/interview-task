@@ -1,6 +1,5 @@
 package com.epages.interview;
 
-import com.epages.interview.dao.ProductRepository;
 import com.epages.interview.domain.Product;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,14 +8,10 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.nio.charset.Charset;
@@ -27,15 +22,12 @@ import static org.testng.Assert.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class InterviewApplicationTests extends AbstractTestNGSpringContextTests {
+public class InterviewApplicationTests extends AbstractStorageTest {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     @Test
     public void shouldReturnCorrectOrderWithParam() throws Exception {
@@ -89,11 +81,6 @@ public class InterviewApplicationTests extends AbstractTestNGSpringContextTests 
         product.setBrand("Brand B");
         product.setPrice(45);
         productRepository.save(product);
-    }
-
-    @AfterClass
-    public void clearStorage() {
-        productRepository.deleteAll();
     }
 
 }
